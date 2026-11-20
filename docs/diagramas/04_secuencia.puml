@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam backgroundColor white
+actor Estudiante
+participant "Portal (MVC)" as MVC
+participant "Academic Service" as AS
+database "MySQL" as DB
+participant "Documents Service" as DS
+actor "Secretaría" as Sec
+actor "Dirección" as Dir
+Estudiante -> MVC: Crear postulación
+MVC -> AS: create(call,modality,topic)
+AS -> DB: INSERT applications + requirements (transacción)
+DB --> AS: ID
+AS --> MVC: Expediente borrador
+Estudiante -> MVC: Subir CI, KARDEX, PERFIL
+MVC -> DS: upload (MIME, tamaño, hash)
+DS -> DB: Guardar documento y versión
+Estudiante -> MVC: Presentar
+MVC -> AS: submit(id)
+AS -> DB: Validar adjuntos, actualizar estado
+Sec -> MVC: Verificar requisitos
+MVC -> DB: UPDATE verificaciones
+Dir -> MVC: Revisar versión vigente, aprobar
+MVC -> AS: review(aprobada)
+AS -> DB: Validar todos los requisitos y perfil aprobado
+AS --> Dir: Estado aprobada
+@enduml

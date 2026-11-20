@@ -1,0 +1,90 @@
+@startuml
+skinparam monochrome true
+skinparam backgroundColor white
+hide circle
+skinparam linetype ortho
+entity USERS { * id : BIGINT <<PK>>
+--
+email : VARCHAR(190) <<UQ>>
+password_hash : VARCHAR(255)
+full_name : VARCHAR(150) }
+entity ROLES { * id : SMALLINT <<PK>>
+code : VARCHAR(32) <<UQ>> }
+entity USER_ROLES { * user_id : BIGINT <<PK,FK>>
+* role_id : SMALLINT <<PK,FK>> }
+entity CAREERS { * id : INT <<PK>>
+code : VARCHAR(20) <<UQ>> }
+entity STUDENTS { * user_id : BIGINT <<PK,FK>>
+career_id : INT <<FK>>
+enrollment_code : VARCHAR(30) <<UQ>> }
+entity TEACHERS { * user_id : BIGINT <<PK,FK>>
+employee_code : VARCHAR(30) }
+entity STAFF_CAREERS { * user_id : BIGINT <<PK,FK>>
+* career_id : INT <<PK,FK>> }
+entity MODALITIES { * id : SMALLINT <<PK>>
+code : VARCHAR(35)
+requires_defense : BOOL }
+entity CALLS { * id : BIGINT <<PK>>
+career_id : INT <<FK>>
+opens_at, closes_at : DATETIME }
+entity CALL_MODALITIES { * call_id : BIGINT <<PK,FK>>
+* modality_id : SMALLINT <<PK,FK>> }
+entity APPLICATIONS { * id : BIGINT <<PK>>
+student_id : BIGINT <<FK>>
+call_id : BIGINT <<FK>>
+modality_id : SMALLINT <<FK>>
+status : VARCHAR(32) }
+entity REQUIREMENTS { * id : INT <<PK>>
+code : VARCHAR(35) }
+entity REQUIREMENT_VERIFICATIONS { * application_id : BIGINT <<PK,FK>>
+* requirement_id : INT <<PK,FK>>
+status : VARCHAR(16) }
+entity DOCUMENTS { * id : BIGINT <<PK>>
+application_id : BIGINT <<FK>>
+document_type_id : SMALLINT <<FK>> }
+entity DOCUMENT_VERSIONS { * id : BIGINT <<PK>>
+document_id : BIGINT <<FK>>
+version_number : SMALLINT
+sha256 : CHAR(64) }
+entity ASSIGNMENTS { * id : BIGINT <<PK>>
+application_id : BIGINT <<FK>>
+teacher_id : BIGINT <<FK>>
+role_code, seat }
+entity EVALUATIONS { * id : BIGINT <<PK>>
+assignment_id : BIGINT <<FK>>
+rubric_id : INT <<FK>>
+sufficient : BOOL }
+entity DEFENSES { * id : BIGINT <<PK>>
+application_id : BIGINT <<UQ,FK>>
+room_id : INT <<FK>>
+starts_at, ends_at }
+entity DEFENSE_SCORES { * defense_id : BIGINT <<PK,FK>>
+* assignment_id : BIGINT <<PK,FK>>
+grade : DECIMAL(5,2) }
+entity ACTS { * id : BIGINT <<PK>>
+defense_id : BIGINT <<UQ,FK>>
+final_grade : DECIMAL(5,2) }
+USERS ||--o{ USER_ROLES
+ROLES ||--o{ USER_ROLES
+USERS ||--o| STUDENTS
+USERS ||--o| TEACHERS
+USERS ||--o{ STAFF_CAREERS
+CAREERS ||--o{ STAFF_CAREERS
+CAREERS ||--o{ STUDENTS
+CAREERS ||--o{ CALLS
+CALLS ||--o{ CALL_MODALITIES
+MODALITIES ||--o{ CALL_MODALITIES
+STUDENTS ||--o{ APPLICATIONS
+CALL_MODALITIES ||--o{ APPLICATIONS
+APPLICATIONS ||--o{ REQUIREMENT_VERIFICATIONS
+REQUIREMENTS ||--o{ REQUIREMENT_VERIFICATIONS
+APPLICATIONS ||--o{ DOCUMENTS
+DOCUMENTS ||--o{ DOCUMENT_VERSIONS
+APPLICATIONS ||--o{ ASSIGNMENTS
+TEACHERS ||--o{ ASSIGNMENTS
+ASSIGNMENTS ||--o| EVALUATIONS
+APPLICATIONS ||--o| DEFENSES
+DEFENSES ||--o{ DEFENSE_SCORES
+ASSIGNMENTS ||--o{ DEFENSE_SCORES
+DEFENSES ||--o| ACTS
+@enduml

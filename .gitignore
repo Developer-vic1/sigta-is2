@@ -1,0 +1,16 @@
+.env
+/vendor/
+/node_modules/
+/storage/private/documents/*
+/storage/private/acts/*
+/storage/logs/*
+!/storage/private/documents/.gitkeep
+!/storage/private/acts/.gitkeep
+!/storage/logs/.gitkeep
+/database/backups/*.sql
+.DS_Store
+.codex/
+**/.codex/
+/storage/private/*.txt
+/storage/private/testing/
+/.local/

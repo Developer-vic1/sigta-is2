@@ -1,0 +1,10 @@
+digraph G {graph [bgcolor=white,rankdir=TB,pad=.4,nodesep=.6,ranksep=.7,label="SIGTA — Arquitectura modular MVC y N capas",labelloc=t,fontsize=22,fontname=Arial];node [shape=box,style="rounded,filled",fillcolor=white,color=black,fontname=Arial,fontsize=12,width=2.6,height=.7];edge[arrowsize=.7,color="#333333"];
+actors[label="Estudiante · Tutor · Tribunal\nDirección · Secretaría · Admin"];
+ui[label="Interfaz responsiva\nHTML · CSS · JavaScript"];
+router[label="Router y seguridad HTTP\nCSRF · RBAC · Sesiones"];
+subgraph cluster_mvc{label="Controladores MVC";labeljust=l;labelloc=t;fontsize=11;style=rounded;color="#999999";portal[label="Portal y postulaciones"];document[label="Documentos y evaluaciones"];defense[label="Defensas y administración"];}
+subgraph cluster_domain{label="Servicios de dominio";labeljust=l;labelloc=t;fontsize=11;style=rounded;color="#999999";academic[label="Academic · Estados"];docservice[label="Documents · Versiones"];defservice[label="Defense · Excellence · PDF"];}
+pdo[label="Persistencia PDO\nTransacciones y consultas preparadas"];
+db[label="MySQL 8 · Modelo relacional\nClaves y restricciones"];
+storage[label="Almacenamiento privado\nVersiones y actas"];
+actors->ui->router;router->portal;router->document;router->defense;portal->academic;document->docservice;defense->defservice;academic->pdo;docservice->pdo;defservice->pdo;pdo->db;docservice->storage;defservice->storage;}

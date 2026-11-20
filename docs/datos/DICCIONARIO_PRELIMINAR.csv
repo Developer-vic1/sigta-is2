@@ -1,0 +1,207 @@
+﻿tabla,columna,tipo_sql,permite_nulo,llaves,referencia_fk,otras_restricciones,observacion
+users,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+users,full_name,VARCHAR(150),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+users,email,VARCHAR(190),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+users,password_hash,VARCHAR(255),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+users,active,TINYINT,NO,,,(1) NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+users,created_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+users,updated_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+roles,id,SMALLINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+roles,code,VARCHAR(32),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+roles,name,VARCHAR(70),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+user_roles,user_id,BIGINT UNSIGNED,NO,PK FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+user_roles,role_id,SMALLINT UNSIGNED,NO,PK FK,roles.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+careers,id,INT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+careers,code,VARCHAR(20),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+careers,name,VARCHAR(120),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+careers,active,TINYINT,NO,,,NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+staff_careers,user_id,BIGINT UNSIGNED,NO,PK FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+staff_careers,career_id,INT UNSIGNED,NO,PK FK,careers.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+students,user_id,BIGINT UNSIGNED,NO,PK FK,users.id,PRIMARY KEY,Columna declarada en el DDL inicial; validar semántica con reglamento
+students,career_id,INT UNSIGNED,NO,FK,careers.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+students,enrollment_code,VARCHAR(30),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+teachers,user_id,BIGINT UNSIGNED,NO,PK FK,users.id,PRIMARY KEY,Columna declarada en el DDL inicial; validar semántica con reglamento
+teachers,employee_code,VARCHAR(30),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+specialties,id,INT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+specialties,name,VARCHAR(100),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+teacher_specialties,teacher_id,BIGINT UNSIGNED,NO,PK FK,teachers.user_id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+teacher_specialties,specialty_id,INT UNSIGNED,NO,PK FK,specialties.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+modalities,id,SMALLINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+modalities,code,VARCHAR(35),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+modalities,name,VARCHAR(90),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+modalities,requires_profile,TINYINT,NO,,,NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+modalities,requires_tutor,TINYINT,NO,,,NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+modalities,requires_tribunal,TINYINT,NO,,,NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+modalities,requires_defense,TINYINT,NO,,,NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+career_modalities,career_id,INT UNSIGNED,NO,PK FK,careers.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+career_modalities,modality_id,SMALLINT UNSIGNED,NO,PK FK,modalities.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+modality_grade_weights,modality_id,SMALLINT UNSIGNED,NO,PK FK,modalities.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+modality_grade_weights,assignment_role,VARCHAR(12),NO,PK,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+modality_grade_weights,weight_percent,"DECIMAL(5,2)",NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+career_regulations,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+career_regulations,career_id,INT UNSIGNED,NO,FK UNIQUE,careers.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+career_regulations,version_code,VARCHAR(35),NO,UNIQUE,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+career_regulations,title,VARCHAR(160),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+career_regulations,regulation_text,TEXT,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+career_regulations,created_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+career_regulations,created_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+calls,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+calls,career_id,INT UNSIGNED,NO,FK,careers.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+calls,title,VARCHAR(160),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+calls,opens_at,DATETIME,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+calls,closes_at,DATETIME,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+calls,progress_days,SMALLINT UNSIGNED,NO,,,NOT NULL DEFAULT 180,Columna declarada en el DDL inicial; validar semántica con reglamento
+calls,active,TINYINT,NO,,,NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+calls,created_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+calls,created_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+call_modalities,call_id,BIGINT UNSIGNED,NO,PK FK,calls.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+call_modalities,modality_id,SMALLINT UNSIGNED,NO,PK FK,modalities.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+requirements,id,INT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+requirements,code,VARCHAR(35),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+requirements,name,VARCHAR(120),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+requirements,description,VARCHAR(240),SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+modality_requirements,modality_id,SMALLINT UNSIGNED,NO,PK FK,modalities.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+modality_requirements,requirement_id,INT UNSIGNED,NO,PK FK,requirements.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,student_id,BIGINT UNSIGNED,NO,FK UNIQUE,students.user_id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,call_id,BIGINT UNSIGNED,NO,FK UNIQUE,call_modalities.call_id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,modality_id,SMALLINT UNSIGNED,NO,FK,call_modalities.modality_id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,topic,VARCHAR(220),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,abstract_text,TEXT,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,status,VARCHAR(32),NO,,,NOT NULL DEFAULT 'borrador',Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,decision_note,TEXT,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,decided_by,BIGINT UNSIGNED,SI,FK,users.id,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,submitted_at,DATETIME,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,approved_at,DATETIME,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,last_progress_at,DATETIME,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,created_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+applications,updated_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+requirement_verifications,application_id,BIGINT UNSIGNED,NO,PK FK,applications.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+requirement_verifications,requirement_id,INT UNSIGNED,NO,PK FK,requirements.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+requirement_verifications,status,VARCHAR(16),NO,,,NOT NULL DEFAULT 'pendiente',Columna declarada en el DDL inicial; validar semántica con reglamento
+requirement_verifications,notes,VARCHAR(300),SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+requirement_verifications,verified_by,BIGINT UNSIGNED,SI,FK,users.id,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+requirement_verifications,verified_at,DATETIME,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_types,id,SMALLINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_types,code,VARCHAR(35),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_types,name,VARCHAR(110),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+documents,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+documents,application_id,BIGINT UNSIGNED,NO,FK UNIQUE,applications.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+documents,document_type_id,SMALLINT UNSIGNED,NO,FK UNIQUE,document_types.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+documents,milestone_id,BIGINT UNSIGNED,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+documents,milestone_key,BIGINT UNSIGNED,CALCULADO,UNIQUE,,"GENERATED ALWAYS AS (COALESCE(milestone_id,0)) STORED",Columna declarada en el DDL inicial; validar semántica con reglamento
+documents,created_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+documents,created_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,document_id,BIGINT UNSIGNED,NO,FK UNIQUE,documents.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,version_number,SMALLINT UNSIGNED,NO,UNIQUE,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,storage_key,VARCHAR(140),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,original_filename,VARCHAR(180),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,mime_type,VARCHAR(80),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,file_size,INT UNSIGNED,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,sha256,CHAR(64),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,uploaded_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_versions,created_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_reviews,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_reviews,version_id,BIGINT UNSIGNED,NO,FK,document_versions.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_reviews,reviewer_id,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_reviews,decision,VARCHAR(20),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_reviews,comments,TEXT,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+document_reviews,reviewed_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+assignments,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+assignments,application_id,BIGINT UNSIGNED,NO,FK UNIQUE,applications.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+assignments,teacher_id,BIGINT UNSIGNED,NO,FK UNIQUE,teachers.user_id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+assignments,role_code,VARCHAR(12),NO,UNIQUE,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+assignments,seat,TINYINT UNSIGNED,NO,UNIQUE,,NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+assignments,assigned_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+assignments,assigned_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+assignments,ended_at,DATETIME,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+assignments,active_marker,TINYINT,CALCULADO,UNIQUE,,GENERATED ALWAYS AS (CASE WHEN ended_at IS NULL THEN 1 ELSE NULL END) STORED,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestones,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestones,application_id,BIGINT UNSIGNED,NO,FK UNIQUE,applications.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestones,title,VARCHAR(140),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestones,sequence_no,SMALLINT UNSIGNED,NO,UNIQUE,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestones,due_at,DATETIME,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestones,status,VARCHAR(20),NO,,,NOT NULL DEFAULT 'pendiente',Columna declarada en el DDL inicial; validar semántica con reglamento
+milestones,completed_at,DATETIME,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestones,created_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestone_submissions,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestone_submissions,milestone_id,BIGINT UNSIGNED,NO,FK UNIQUE,milestones.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestone_submissions,version_id,BIGINT UNSIGNED,NO,FK UNIQUE,document_versions.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestone_submissions,submitted_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+milestone_submissions,submitted_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+rubrics,id,INT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+rubrics,modality_id,SMALLINT UNSIGNED,NO,FK,modalities.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+rubrics,name,VARCHAR(120),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+rubrics,active,TINYINT,NO,,,NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+rubric_criteria,id,INT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+rubric_criteria,rubric_id,INT UNSIGNED,NO,FK UNIQUE,rubrics.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+rubric_criteria,label,VARCHAR(130),NO,UNIQUE,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+rubric_criteria,weight_percent,"DECIMAL(5,2)",NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+evaluations,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+evaluations,assignment_id,BIGINT UNSIGNED,NO,FK UNIQUE,assignments.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+evaluations,rubric_id,INT UNSIGNED,NO,FK,rubrics.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+evaluations,sufficient,TINYINT,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+evaluations,comments,VARCHAR(1000),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+evaluations,evaluated_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+evaluation_scores,evaluation_id,BIGINT UNSIGNED,NO,PK FK,evaluations.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+evaluation_scores,criterion_id,INT UNSIGNED,NO,PK FK,rubric_criteria.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+evaluation_scores,score,"DECIMAL(5,2)",NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+rooms,id,INT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+rooms,name,VARCHAR(100),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+rooms,capacity,SMALLINT UNSIGNED,NO,,,NOT NULL DEFAULT 20,Columna declarada en el DDL inicial; validar semántica con reglamento
+rooms,active,TINYINT,NO,,,NOT NULL DEFAULT 1,Columna declarada en el DDL inicial; validar semántica con reglamento
+defenses,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+defenses,application_id,BIGINT UNSIGNED,NO,FK UNIQUE,applications.id,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+defenses,room_id,INT UNSIGNED,NO,FK,rooms.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+defenses,starts_at,DATETIME,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+defenses,ends_at,DATETIME,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+defenses,status,VARCHAR(20),NO,,,NOT NULL DEFAULT 'programada',Columna declarada en el DDL inicial; validar semántica con reglamento
+defenses,scheduled_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+defenses,scheduled_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+defense_scores,defense_id,BIGINT UNSIGNED,NO,PK FK,defenses.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+defense_scores,assignment_id,BIGINT UNSIGNED,NO,PK FK,assignments.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+defense_scores,grade,"DECIMAL(5,2)",NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+defense_scores,comments,VARCHAR(700),SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+defense_scores,scored_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+acts,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+acts,defense_id,BIGINT UNSIGNED,NO,FK UNIQUE,defenses.id,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+acts,final_grade,"DECIMAL(5,2)",NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+acts,storage_key,VARCHAR(140),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+acts,sha256,CHAR(64),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+acts,issued_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+acts,issued_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+binding_authorizations,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+binding_authorizations,application_id,BIGINT UNSIGNED,NO,FK UNIQUE,applications.id,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+binding_authorizations,final_version_id,BIGINT UNSIGNED,NO,FK,document_versions.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+binding_authorizations,storage_key,VARCHAR(140),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+binding_authorizations,sha256,CHAR(64),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+binding_authorizations,authorized_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+binding_authorizations,authorized_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+resolutions,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+resolutions,application_id,BIGINT UNSIGNED,NO,FK UNIQUE,applications.id,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+resolutions,final_grade,"DECIMAL(5,2)",NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+resolutions,basis_note,VARCHAR(800),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+resolutions,storage_key,VARCHAR(140),NO,UNIQUE,,NOT NULL UNIQUE,Columna declarada en el DDL inicial; validar semántica con reglamento
+resolutions,sha256,CHAR(64),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+resolutions,issued_by,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+resolutions,issued_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+notifications,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+notifications,user_id,BIGINT UNSIGNED,NO,FK,users.id,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+notifications,application_id,BIGINT UNSIGNED,SI,FK,applications.id,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+notifications,content,VARCHAR(500),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+notifications,read_at,DATETIME,SI,,,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+notifications,created_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+audit_logs,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+audit_logs,actor_user_id,BIGINT UNSIGNED,SI,FK,users.id,NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+audit_logs,event_code,VARCHAR(70),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+audit_logs,entity_type,VARCHAR(70),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+audit_logs,entity_id,BIGINT UNSIGNED,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+audit_logs,details_json,JSON,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+audit_logs,ip_hash,CHAR(64),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+audit_logs,created_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento
+login_attempts,id,BIGINT UNSIGNED,NO,PK,,PRIMARY KEY AUTO_INCREMENT,Columna declarada en el DDL inicial; validar semántica con reglamento
+login_attempts,identifier_hash,CHAR(64),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+login_attempts,ip_hash,CHAR(64),NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+login_attempts,success,TINYINT,NO,,,NOT NULL,Columna declarada en el DDL inicial; validar semántica con reglamento
+login_attempts,created_at,DATETIME,NO,,,NOT NULL DEFAULT CURRENT_TIMESTAMP,Columna declarada en el DDL inicial; validar semántica con reglamento

@@ -1,0 +1,45 @@
+@startuml
+skinparam monochrome true
+skinparam backgroundColor white
+skinparam componentStyle rectangle
+actor "Actores académicos" as A
+node "Navegador web" {
+ component "UI responsiva\nHTML / CSS / JS" as UI
+}
+node "Servidor Apache / PHP 8.2+" {
+ component "Router HTTP + CSRF" as Router
+ component "Autenticación / RBAC" as RBAC
+ package "Controladores MVC" {
+  component "Portal / Postulaciones" as C1
+  component "Documentos / Evaluaciones" as C2
+  component "Defensas / Administración" as C3
+ }
+ package "Servicios de dominio" {
+  component "Academic / Workflow" as W
+  component "Documents" as D
+  component "Defense / Excellence" as F
+  component "PDF" as P
+ }
+ component "PDO / Transacciones" as PDO
+}
+database "MySQL 8\n33+ tablas relacionales" as DB
+folder "Almacenamiento privado\nVersiones / Actas" as Disk
+component "Cron externo\ncaducidad" as Cron
+A --> UI
+UI --> Router
+Router --> RBAC
+RBAC --> C1
+RBAC --> C2
+RBAC --> C3
+C1 --> W
+C2 --> D
+C3 --> F
+F --> P
+W --> PDO
+D --> PDO
+F --> PDO
+PDO --> DB
+D --> Disk
+P --> Disk
+Cron --> DB
+@enduml

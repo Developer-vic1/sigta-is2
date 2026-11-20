@@ -1,0 +1,9 @@
+ID,Titulo,Prioridad,Sprint propuesto,Estado inicial,Criterio principal
+HU01,Registro de postulación,Must,1,Pendiente,Carrera y convocatoria vigentes
+HU02,Documentos y versiones,Must,1,Pendiente,Formato y acceso seguro
+HU03,Verificación de requisitos,Must,2,Pendiente,No aprobar sin requisitos completos
+HU04,Aprobación y designación docente,Must,2,Pendiente,Sin doble rol tutor/tribunal
+HU05,Hitos y rúbricas,Must,2,Pendiente,Suficiencia por miembros requeridos
+HU06,Programación de defensa,Must,3,Pendiente,Sin conflictos de horario
+HU07,Acta con nota ponderada,Must,3,Pendiente,Todas las notas y PDF marcado demo
+HU08,Convocatorias reportes y caducidad,Should,3,Pendiente,Indicadores y cron verificables

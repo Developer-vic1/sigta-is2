@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam backgroundColor white
+left to right direction
+actor Estudiante
+actor Tutor
+actor Tribunal
+actor "Dirección de Carrera" as Director
+actor "Secretaría Académica" as Secretaria
+actor "Administrador técnico" as Admin
+rectangle "SIGTA - Gestión integral de titulación" {
+ usecase "Postular a modalidad" as UC1
+ usecase "Subir y versionar documentos" as UC2
+ usecase "Consultar expediente" as UC3
+ usecase "Verificar requisitos" as UC4
+ usecase "Revisar perfil" as UC5
+ usecase "Designar tutor/tribunal" as UC6
+ usecase "Gestionar hitos" as UC7
+ usecase "Emitir dictamen" as UC8
+ usecase "Programar defensa" as UC9
+ usecase "Calificar defensa" as UC10
+ usecase "Generar acta PDF" as UC11
+ usecase "Resolver Excelencia" as UC12
+ usecase "Convocatorias y reportes" as UC13
+ usecase "Gestionar usuarios" as UC14
+}
+Estudiante --> UC1
+Estudiante --> UC2
+Estudiante --> UC3
+Secretaria --> UC4
+Secretaria --> UC9
+Secretaria --> UC11
+Director --> UC5
+Director --> UC6
+Director --> UC12
+Director --> UC13
+Tutor --> UC7
+Tutor --> UC8
+Tutor --> UC10
+Tribunal --> UC8
+Tribunal --> UC10
+Admin --> UC14
+@enduml
